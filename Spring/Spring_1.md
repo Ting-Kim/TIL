@@ -6,6 +6,107 @@
 - AOP(Aspect Oriented Programming)
 - 프록시(proxy)
 - Spring을 이용한 MVC 패턴
+- DI(Dependency Injection)
+- Transaction(트랜잭션)
+- Servlet Filter
+- IoC(Inversion Of Control) 컨테이너 : 부품 혹은 조립된 부품들이 담긴 컨테이너
+
+#### bean 태그
+
+```
+<!-- xml 파일 (지시서) -->
+<bean id="객체명" class="객체화할 클래스명(패키지명 포함)" />
+
+<!-- Setter 사용 -->
+<bean id="exam" class="spring.di.entity.NewlecExam">
+	<property name="kor">
+		<value>10</value>		<!-- value를 이렇게 줄 수도 있음. -->
+	</property>
+	<property name="eng" value="10" />
+	<property name="mat" value="10" />
+	<property name="com" value="10" />
+</bean>
+
+<!-- ex. ExamConsole console = new GridExamConsole(); -->
+<bean id="console" class="spring.di.ui.InlineExamConsole">
+
+	<property name="(Setter 함수명에서 set을 생략)" value="객체의 이름(value 타입일 경우 - 특정 인자의 경우?)" ref="객체의 이름(ref 타입일 경우 - 객체의 경우?)"/>
+
+<!-- console.setExam(exam); (Setter 함수 지시사항)-->
+	<property name="exam" ref="exam"/>
+
+</bean>
+```
+
+```
+<!-- xml 파일 (지시서) -->
+<bean id="객체명" class="객체화할 클래스명(패키지명 포함)" />
+
+<!-- 생성자를 통해서 생성하는 경우 -->
+<bean id="exam" class="spring.di.entity.NewlecExam">
+	<!-- index 없어도 됨 -->
+	<constructor-arg index="0" value="10" />
+	<constructor-arg index="1" value="20" />
+	<constructor-arg index="2" value="30" />
+
+	<!-- name, type 속성도 사용 가능 -->
+	<constructor-arg name="mat" type="int" value="40" />
+</bean>
+```
+
+```
+public class Program{
+
+	public static void main(String[] args){
+
+		ApplicationContext context = new ClassPathXmlApplicationContext("sprint/di/setting.xml");
+
+		// bean 객체를 불러오는 두가지 방법
+		//ExamConsole console = (ExamConsole)context.getBean("console");
+		ExamConsole console = context.getBean(ExamConsole.class);
+		console.print();
+	}
+}
+```
+
+#### DI(Dependency Injection)
+
+```
+// has-a 관계(일체형)
+class A
+{
+	private B b;
+
+	public A(){
+		b = new B();
+	}
+}
+
+// 조립형
+class A
+{
+	private B b;
+
+	public A(){
+
+	}
+	public void setB(B b){
+		this.b = b;
+	}
+}
+```
+
+'부품 조립'
+
+- Setter Injection : Setter 함수를 통해서 조립
+- Contruction Injection : 생성자를 통해서 조립
+
+##### ApplicationContext 종류
+
+- ClassPathXmlApplicationContext
+- FileSystemXmlApplicationContext
+- XmlWebApplicationContext
+- AnnotationConfigApplicationContext
 
 #### AOP(Aspect Oriented Programming)
 
