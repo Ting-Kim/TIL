@@ -206,6 +206,37 @@ Front Controller를 서블릿으로 등록할 때 XmlWebApplicationContext 스�
 
 (\*View가 Spring에서는 꼭 JSP가 아닐 수 있다.)
 
+##### 파라미터 받는 방법 3가지
+
+1. String p_page = request.getParameter("pg");
+2. @RequestParam
+3. 커맨드 객체
+
+#### 스프링에서 제공하는 파일 업로드 방법
+
+1. form 태그의 enctype="multipart/form-data"
+2. 스프링에서 제공하는 멀티파트 지원 기능 사용하기 위해서 [MultipartResolver 객체]를 빈으로 등록<br>
+   (주의) 빈으로 등록될 때 빈 이름:
+   (DispatcherServlet에서 위 이름을 사용하기 때문)
+
+3. MultipartResolver 객체는 2가지 종류
+   - CommonsMultipartResolver<br> - Commons FileUpload API를 이용해서 처리 - 설정하는 프로퍼티(속성)<br> - maxUploadSize : 최대 업로드 가능한 바이트 크기<br> - maxInMemorySize<br> - defaultEncoding
+   - StandardServletMultipartResolver - 서블릿 3.0의 part를 이용해서 처리
+
+#### error message :
+
+```
+심각: 경로 [/SpringMVC03]의 컨텍스트 내의 서블릿 [dispatcher]을(를) 위한 Servlet.service() 호출이, 근본 원인(root cause)과 함께, 예외 [Request processing failed; nested exception is org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'notice' on field 'file': rejected value []; codes [typeMismatch.notice.file,typeMismatch.file,typeMismatch.org.springframework.web.multipart.commons.CommonsMultipartFile,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [notice.file,file]; arguments []; default message [file]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'org.springframework.web.multipart.commons.CommonsMultipartFile' for property 'file'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [java.lang.String] to required type [org.springframework.web.multipart.commons.CommonsMultipartFile] for property 'file': no matching editors or conversion strategy found]]을(를) 발생시켰습니다.
+org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'notice' on field 'file': rejected value []; codes [typeMismatch.notice.file,typeMismatch.file,typeMismatch.org.springframework.web.multipart.commons.CommonsMultipartFile,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [notice.file,file]; arguments []; default message [file]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'org.springframework.web.multipart.commons.CommonsMultipartFile' for property 'file'; nested exception is java.lang.IllegalStateException: Cannot convert value of type [java.lang.String] to required type [org.springframework.web.multipart.commons.CommonsMultipartFile] for property 'file': no matching editors or conversion strategy found]
+```
+
+```
+<form action="" method="post" enctype="multipart/form-data">
+<!-- enctype="multipart/form-data" 를 추가 안해줘서 생기는 문제.. 왜? -->
+```
+
 ref)
 
 - https://atoz-develop.tistory.com/entry/Spring-%EC%8A%A4%ED%94%84%EB%A7%81-XML-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95-%EC%A0%95%EB%A6%AC : [Spring] 스프링 XML 설정 파일 작성 방법 정리
