@@ -237,8 +237,31 @@ Field error in object 'notice' on field 'file': rejected value []; codes [typeMi
 <!-- enctype="multipart/form-data" 를 추가 안해줘서 생기는 문제.. 왜? -->
 ```
 
+20200806 Spring Days04
+주요 문제들
+
+- HashMap 사용 이유
+- 쓰레드
+- 트랜젝션
+- ACID(트랜잭션의 종류(?))
+- Propagation : 트랜잭션 개시할지 등 전파행위에 관한 속성.
+- 전파행위 : 전파행위(거동)는 트랜잭션을 개시할지 혹은 기존 트랜잭션을 이용할지 등 트랜잭션 경계(Transaction Boundary)를 설정할 때 이용하는 속성으로 가장 중요한 속성
+- isolation : 트랜잭션 격리레벨에 관한 속성으로 기본값은 Default레벨이며 실제 사용하는 데이터베이스(JDBC) 등의 기본값을 따릅니다.
+
+Transaction을 Annotation을 통해 설정하는 경우
+
+```
+
+   <!-- @Transactional 어노테이션을 사용한 트랜잭션처리를 위해 추가한 코딩( 반드시 필요 ! ) >> 트랜잭션을 설정하려면 트랜잭션 매니저는  한곳에는 들어가야함. -->
+   <tx:annotation-driven transaction-manager="transactionManager"/>
+```
+
+1. interface에 Transaction 어노테이션(Annotation)을 걸어주면 그 인터페이스를 Overriding한 클래스들에 모두 적용됨.
+
 ref)
 
 - https://atoz-develop.tistory.com/entry/Spring-%EC%8A%A4%ED%94%84%EB%A7%81-XML-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95-%EC%A0%95%EB%A6%AC : [Spring] 스프링 XML 설정 파일 작성 방법 정리
 - https://zorba91.tistory.com/249 : [Spring] context:component-scan 사용법 정리
 - https://docs.spring.io/spring/docs/3.0.0.M4/reference/html/ch03s10.html : 스프링 공식문서(3.10 Classpath scanning and managed components)
+- https://reiphiel.tistory.com/entry/understanding-of-spring-transaction-management-practice [레이피엘의 블로그] Spring 트랜잭션 관리방법
+- https://freehoon.tistory.com/110 Spring 블로그 만들기 - 8.트랜잭션 처리
