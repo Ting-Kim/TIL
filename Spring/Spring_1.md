@@ -258,7 +258,93 @@ Transaction을 Annotation을 통해 설정하는 경우
 
 1. interface에 Transaction 어노테이션(Annotation)을 걸어주면 그 인터페이스를 Overriding한 클래스들에 모두 적용됨.
 
-ref)
+## 20200809 집에서 복습
+
+#### @AutoWired
+
+자동으로 찾아서 Setter에 인자를 대입시켜줌.
+근데 어떤 기준으로 매칭시키는지 의문임.. (자료형이나 객체명이 기준이라면 동일한게 있을 경우 어떻게 처리하는지 등)
+
+```
+//spring.di.ui.InlineExamConsole Class
+@Autowired
+public void setExam(Exam exam) {
+		this.exam = exam;
+}
+
+//xml 파일
+<bean class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10"/>
+<bean class="spring.di.entity.NewlecExam p:kor="20" p:eng="20""/>
+// 데이터 값이 다른 두개의 빈이 있는 경우 Err 발생
+
+<bean id="exam1" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10"/>
+<bean class="spring.di.entity.NewlecExam p:kor="20" p:eng="20""/>
+// 빈의 id가 인자명이랑 달라도 Err발생
+
+<bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10"/>
+<bean class="spring.di.entity.NewlecExam p:kor="20" p:eng="20""/>
+// 이 경우는 인자명과 bean의 id명이 동일해서 정상적으로 출력
+```
+
+```
+//spring.di.ui.InlineExamConsole Class
+@Autowired
+@Qualifier("exam2")
+public void setExam(Exam exam) {
+		this.exam = exam;
+}
+
+//xml 파일
+<bean id="exam1" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10"/>
+<bean id="exam2" class="spring.di.entity.NewlecExam p:kor="20" p:eng="20""/>
+
+// 이 경우는 @Qualifier 어노테이션을 사용해서 id값 지정
+```
+
+인젝션 방법 3가지
+
+```
+
+public class InlineExamConsole implements ExamConsole {
+
+	//@Autowired	//1번
+	//@Qualifier("exam2")
+	private Exam exam;
+
+	//@Autowired	//2번
+	//@Qualifier("exam2")
+	public InlineExamConsole(Exam exam) {
+		this.exam = exam;
+	}
+
+	@Autowired		//3번
+	@Qualifier("exam2")
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+}
+
+// 1번은 기본생성자 호출되는 과정에서 Injection이 되는 경우(기본생성자 없으면 실행 불가(오버로드 생성자도 없는 경우는 가능))
+// 3번은 Setter가 실행되면서 Injectrion이 되는 경우
+
+// 2번은 저렇게 쓰면 안되고 이렇게 써야함.
+
+	@Autowired	//2번
+	public InlineExamConsole(@Qualifier("exam2")Exam exam) {
+		this.exam = exam;
+	}
+```
+
+넣어줄 인자가 null일 경우에도 실행되게 하려면?<br>
+Autowired 어노테이션에 required 속성을 false로 지정하면 된다.
+
+```
+	//@Autowired(required=false)
+	//@Qualifier("exam2")
+	private Exam exam;
+```
+
+### ref)
 
 - https://atoz-develop.tistory.com/entry/Spring-%EC%8A%A4%ED%94%84%EB%A7%81-XML-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95-%EC%A0%95%EB%A6%AC : [Spring] 스프링 XML 설정 파일 작성 방법 정리
 - https://zorba91.tistory.com/249 : [Spring] context:component-scan 사용법 정리
