@@ -59,7 +59,7 @@ public class Program{
 
 	public static void main(String[] args){
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("sprint/di/setting.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring/di/setting.xml");
 
 		// bean 객체를 불러오는 두가지 방법
 		//ExamConsole console = (ExamConsole)context.getBean("console");
@@ -347,6 +347,8 @@ Autowired 어노테이션에 required 속성을 false로 지정하면 된다.
 ## 20200810 월
 
 ### Spring-tiles
+
+## 20200811 화
 
 ### ref)
 
