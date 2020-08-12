@@ -189,7 +189,7 @@ base-package : 패키지를 어디부터 스캔할지 지정해주는 부분<br>
 
 구성요소
 
-- DispatcherServlet : 모든 요청을 전달 받음. 클라이언트의 요청을 Controller에 전달 및 Controller의 리턴 결과값을 View에 전달.
+- DispatcherServlet : 모든 요청을 전달 받음(클라이언트의 요청을 전달받는 서블릿). 클라이언트의 요청을 Controller에 전달 및 Controller의 리턴 결과값을 View에 전달.
 - HandlerAdapter ( Spring Bean 객체 ) : DispatcherServlet 요청을 변환해서 Conroller에 전달
 - Controller ( Spring Bean 객체 )
 - HandlerMapping ( Spring Bean 객체 )
@@ -199,6 +199,12 @@ base-package : 패키지를 어디부터 스캔할지 지정해주는 부분<br>
 Spring에서의 Controller는 모델 객체를 말한다.
 일반적인 Handler를 Controller라고 칭함.<br>
 보통 작업이 많이 필요한 부분은 Controller, JSP 이다. (나머지는 프레임워크 내부에 구현되어 있음.)
+
+### XML 설정
+
+DispatcherServlet 클래스에는 <servlet-name> 태그에 의해 서블릿 이름을 지정하여 정의한다.
+
+이 서블릿 이름에 ‘-servlet.XML’ 라는 문자열을 부가함으로써 컨테이너 상에 로드된 스프링 설정 파일명이 결정된다.
 
 ##### front Controller / controller
 
@@ -344,12 +350,6 @@ Autowired 어노테이션에 required 속성을 false로 지정하면 된다.
 	private Exam exam;
 ```
 
-## 20200810 월
-
-### Spring-tiles
-
-## 20200811 화
-
 ### ref)
 
 - https://atoz-develop.tistory.com/entry/Spring-%EC%8A%A4%ED%94%84%EB%A7%81-XML-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95-%EC%A0%95%EB%A6%AC : [Spring] 스프링 XML 설정 파일 작성 방법 정리
@@ -357,3 +357,4 @@ Autowired 어노테이션에 required 속성을 false로 지정하면 된다.
 - https://docs.spring.io/spring/docs/3.0.0.M4/reference/html/ch03s10.html : 스프링 공식문서(3.10 Classpath scanning and managed components)
 - https://reiphiel.tistory.com/entry/understanding-of-spring-transaction-management-practice [레이피엘의 블로그] Spring 트랜잭션 관리방법
 - https://freehoon.tistory.com/110 Spring 블로그 만들기 - 8.트랜잭션 처리
+- https://devbox.tistory.com/entry/Spring-webxml-%EA%B8%B0%EB%B3%B8-%EC%84%A4%EC%A0%95 [Spring] web.xml 기본 설정
