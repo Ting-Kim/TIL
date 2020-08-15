@@ -350,6 +350,23 @@ Autowired 어노테이션에 required 속성을 false로 지정하면 된다.
 	private Exam exam;
 ```
 
+### AOP(Aspect Oriented Programming)
+
+OOP - 사용자가 이용하는 업무로직에만 관심이 있었음.
+
+개발자나 관리자에 의해 업무로직을 구현하기 위한 코드들이 있는데..
+관점지향은 그러한 코드들과 주 업무로직의 단위업무(객체들)를 분리해서 전체적으로 바라보는 방법론이다..
+
+- 로그처리
+- 보안처리
+- 트랜잭션처리
+
+이것들은 이용자의 요구사항이 아니다..
+Cross-cutting Concern은 코드에서 따로 분리하고 결합할 수 있어야 함.
+
+Proxy 클래스로 Cross-cutting Concern을 구현하고, 중간에 Core Concern을 호출..!
+(~ 뉴렉처 - 19강 Java로 AOP이해)
+
 ### ref)
 
 - https://atoz-develop.tistory.com/entry/Spring-%EC%8A%A4%ED%94%84%EB%A7%81-XML-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95-%EC%A0%95%EB%A6%AC : [Spring] 스프링 XML 설정 파일 작성 방법 정리
