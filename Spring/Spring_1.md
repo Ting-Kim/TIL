@@ -365,7 +365,59 @@ OOP - 사용자가 이용하는 업무로직에만 관심이 있었음.
 Cross-cutting Concern은 코드에서 따로 분리하고 결합할 수 있어야 함.
 
 Proxy 클래스로 Cross-cutting Concern을 구현하고, 중간에 Core Concern을 호출..!
-(~ 뉴렉처 - 19강 Java로 AOP이해)
+(~ 뉴렉처 - 19강 'Java 코드로 AOP이해')
+
+```
+package spring.aop;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+import spring.aop.entity.Exam;
+import spring.aop.entity.NewlecExam;
+
+public class Program {
+	public static void main(String[] args) {
+		// Exam exam만 사용하면 원래 업무만 사용함.
+		Exam exam = new NewlecExam(1,1,1,1);
+
+
+		// Exam을 쓰는것 같이 느껴질 수 있지만, proxy를 쓰게되면 곁다리 업무를 포함해서 원래 Exam 업무를 같이 사용함.
+		Exam proxy = (Exam)Proxy.newProxyInstance(NewlecExam.class.getClassLoader(), new Class[] {Exam.class},
+				new InvocationHandler() {
+
+					@Override
+					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+						long start = System.currentTimeMillis();
+
+						Object result = method.invoke(exam, args);    // obj는 실제 업무 객체, 호출하는 메서드가 가지고있는 파라미터를 args에다가 넣어주고 그걸 인자로 받음.
+
+						long end = System.currentTimeMillis();
+						String message = (end - start) + "ms 시간이 걸렸습니다.";
+						System.out.println(message);
+						return result;
+					}
+				}
+		);
+
+		System.out.printf("total is %d\n", proxy.total());
+		System.out.printf("total is %.0f\n", proxy.avg());
+	}
+}
+```
+
+실제 업무(Com Concern)와 보조 업무(Cross-cutting)를 분리하고 결합하는 경우는 다음 4가지가 있다.
+
+- Before Advice(앞만 필요)
+- After returnning Advice(뒤만 필요)
+- After throwing(예외처리만)
+- Around Advice(앞뒤 모두 필요)
+
+포인트컷(PointCut)과 조인 포인트(JoinPoint) 그리고 위빙(Weaving)
+
+조인 포인트를 Cut하는 별도의 정보를 PointCut이라 함.
+(객체에 존재하는 어떤 객체에 한해서만 JoinPoint를 설정하는 정보..?)
 
 ### ref)
 
