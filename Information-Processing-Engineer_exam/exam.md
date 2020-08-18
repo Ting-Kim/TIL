@@ -251,4 +251,56 @@
 - Anycast
 - Multicast
 
+70. TCP/IP 네트워크에서 IP 주소를 MAC 주소로 변환하는 프로토콜은?<br>
+    => ARP
+
+71. 프로세스 상태의 종류가 아닌 것은?<br>
+    => Request
+
+- pending(보류)
+- Ready(준비)
+- Running(실행)
+- blocked(대기)
+- Deadlock(교착)
+- Terminated, Exit(완료)
+
+72. 스레드(Thread)에 대한 설명으로 옳지 않은 것?<br>
+    => 한 개의 프로세스는 여러 개의 스레드를 가질 수 없다.(하나의 프로세스에 여러개의 스레드가 있을 수 있음!)
+
+- 커널 스레드 => 운영체제에 의해 스레드 운용
+- 사용자 스레드 => 사용자가 만든 라이브러릴 사용하여 스레드 운용
+- 스레드를 사용하면 HW, OS 성능과 응용 프로그램의 처리율 향상.
+
+73. HRN(Highest Response-ratio Next, 비선점) 스케쥴링 방식 : 각 작업의 우선순위로 수행하는 스케쥴링 | 우선순위 계산법 = (대기시간 + 서비스시간) / 서비스시간
+
+- SJF 단점을 보완한 스케쥴링 방식
+
+\* SJF(Shortest Job First Scheduling), 최단 작업 우선 스케쥴링 : CPU를 적게 사용하는 것부터 먼저 수행시켜서 끝내버리자!
+
+74. IEEE 802.11 워킹 그룹의 무선 LAN 표준화 현황 중 QoS 강화를 위해 MAC 지원 가능을 채택한 것은?
+
+- 802.11a : 무선 ATM 시스템에 적용, 주로 액세서 허브에서 사용.
+- 802.11b : 흔히 wi-fi라고 불림.
+- 802.11d : 국가별 규격에 맞는 물리계층 보완 방법
+- 802.11e : QoS 보증과 MAC 강화를 위한 표준화 그룹.
+
+76. 스크립트 언어?
+
+- Basic
+- Python
+- Ruby
+- PHP
+- JSP
+- Perl
+- Lua
+- VBS
+
+77. 다음의 페이지 참조 열(Page reference string)에 대해 페이지 교체 기법으로 선입선출 알고리즘을 사용할 경우 페이지 부재(Page Fault) 횟수는? (단, 할당된 페이지 프레임 수는 3이고, 처음에는 모든 프레임이 비어 있다.)<br>
+    보기) 7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1 7 0
+
+ref )
+
+- https://preamtree.tistory.com/21<br>
+- https://matice.tistory.com/53
+
 ## 정보시스템 구축 관리
