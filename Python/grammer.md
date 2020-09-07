@@ -61,7 +61,7 @@ print((lambda a, b: a + b))
 
 # min(), max()
 
-# eval() :
+# eval() : (유용함)
 result = eval("(3+7+4)*3")
 print(result)
 
@@ -95,5 +95,19 @@ combinations_with_replacement 라이브러리
 ```
 result = list(combinations_with_replacement(data, 2)) # 2개를 뽑는 모든 조합 구하기(중복 허용)
 ```
+
+### 라이브러리
+
+- itertools
+  반복되는 데이터 처리 기능
+
+- heapq
+  graph 쪽 알고리즘에 사용
+
+- bisect
+  이진 탐색 기능
+
+- collections
+  덱(deque), 카운터(counter)
 
 ## 그리디 & 구현
