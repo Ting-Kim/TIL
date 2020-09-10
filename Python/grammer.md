@@ -1,5 +1,10 @@
 ## 2차원 배열 입력
 
+### list(리스트) vs tuple(튜플)
+
+\* 참조
+\- https://edykim.com/ko/post/python-list-vs.-tuple/
+
 ### 빠르게 입력 받기
 
 ```
@@ -9,6 +14,9 @@ import sys
 data =  sys.stdin.readline().rstrip()
 
 ```
+
+\* 파이썬 다양한 입력방법 (input(), realine())
+\- https://velog.io/@tbnsok40/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%8B%A4%EC%96%91%ED%95%9C-%EC%9E%85%EB%A0%A5%EB%B0%A9%EB%B2%95-input-read-readline
 
 ###
 
