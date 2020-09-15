@@ -39,8 +39,13 @@ Read(Detail), Update, Delete
 가게 목록 - GET/restaurants
 가게 상세 - GET/restaurants/{id}
 가게 추가 - POST/restaurants
+
+- 작동 - Controller
+- Controller가 사용할 Application Layer = Service
+- Service가 데이터를 관리하게 될 Repository
+
 가게 수정 - PATCH/restaurants/{id}
 가게 삭제 - DELETE/restaurants/{id}
 
 <br>
-~ 패스트캠퍼스 강의 07. 07. 가게 목록
+~ 패스트캠퍼스 강의 15. 15. 가게 추가 2
