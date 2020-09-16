@@ -419,6 +419,60 @@ public class Program {
 조인 포인트를 Cut하는 별도의 정보를 PointCut이라 함.
 (객체에 존재하는 어떤 객체에 한해서만 JoinPoint를 설정하는 정보..?)
 
+### Annotation 모음
+
+@Controller - 클래스
+
+- 컨트롤러 객체임을 명시
+
+@RequestMapping -클래스, 메소드
+
+- 특정 URL에 매칭되는 클래스나 메소드임을 명시
+
+@RequestParam -파라미터
+
+- 요청에서 특정한 파라미터 값을 찾아낼 때 사용
+
+@RequestHeader -파라미터
+
+- 요청에서 특정 HTTP 헤더 정보를 추출할 때 사용
+
+@PathVariable -파라미터
+
+- 현재 URL에서원하는 정보를 추출할 때 사용
+
+@CookieValue -파라미터
+
+- 현재 사용자의쿠키가 존재하는 경우 쿠키의 이름을 이용해서 쿠키값 추출
+
+@ModelAttribute -메소드, 파라미터
+
+- 자동으로 해당 객체를 뷰까지 전달하도록 만든 것
+
+@SessionAttribute -클래스
+
+- 세션상에서 모델의 정보를 유지하고 싶은 경우
+
+@InitBinder -메소드
+
+- 파라미터를 수집해서 객체로 만들 경우 커스터마이징
+
+@ResponseBody -메소드,리턴타입
+
+- 리턴 타입이 HTTP의 응답 메시지로 전송
+
+@RequsetBody -파라미터
+
+- 요청 문자열이 그대로 파라미터로 전달
+
+@Repository -클래스
+
+- DAO 객체
+
+@Service - 클래스
+
+- 서비스 객체
+
 ### ref)
 
 - https://atoz-develop.tistory.com/entry/Spring-%EC%8A%A4%ED%94%84%EB%A7%81-XML-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95-%EC%A0%95%EB%A6%AC : [Spring] 스프링 XML 설정 파일 작성 방법 정리
