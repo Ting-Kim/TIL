@@ -41,3 +41,15 @@ DI : 해당 클래스에서 Repository를 직접 생성하는게 아니라 외�
 - 개방-폐쇄 원칙(OCP, Open-Closed Principle)<br>
 - 스프링의 DI(Dependencies Injection)<br>
   : 설정만으로 구현 클래스 변경 가능
+
+## JPA
+
+: 인터페이스를 제공(자바 진영의 표준 인터페이스)<br>
+구현체로 hibernate 등이 있는 것..<br>
+
+ORM(Object Relational database Mapping)
+Mapping은 어노테이션으로..
+
+Oracle의 Sequece처럼 DB가 PK 자동생성 해주는걸 IDENTITY 전략(@GenerationType.IDENTITY)이라고 함..
+
+## AOP
