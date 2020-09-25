@@ -118,4 +118,21 @@ result = list(combinations_with_replacement(data, 2)) # 2개를 뽑는 모든 �
 - collections
   덱(deque), 카운터(counter)
 
-## 그리디 & 구현
+## 다차원 정렬방법
+
+```
+list = [
+  [1, 65]
+  [5, 23]
+  [2, 99]
+]
+
+list.sort(key=lambda x:x[1])
+print(list)
+
+'''
+실행결과
+[[5, 23], [1, 65], [2, 99]]
+'''
+
+```
