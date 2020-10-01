@@ -8,3 +8,6 @@
 
 Tech Interview for Beginner
 \- https://github.com/JaeYeopHan/Interview_Question_for_Beginner
+
+효율적인 성능, 메모리, 사용성을 위한 파이썬 코드
+\- https://m.blog.naver.com/passion053/221112010085
