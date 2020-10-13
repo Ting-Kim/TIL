@@ -23,3 +23,11 @@ html 파일만 수정했을 경우 전체 서버 재시작은 오래걸리니까
 = implementation 'org.springframework.boot:spring-boot-devtools'
 
 ### 도메인 분석 설계
+
+<br>
+
+## 변경 감지와 병합(merge)
+
+<span style="color:pink; font-size:18px"> \* 정말 중요하다!</span>
+
+준영속 엔티티
