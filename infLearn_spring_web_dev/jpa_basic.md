@@ -45,3 +45,149 @@ member1 == member2; //같다.
 
 객체를 자바 컬렉션에 저장하듯이 DB에 저장할 수 없을까 ? <br>
 => 그에 대한 해답이 'JPA(Java Persistence API, 자바 진영의 ORM 기술 표준)'이다.
+
+### Hello JPA
+
+maven 프로젝트로 실습..
+
+dependency
+
+- hibernate 5.3.10
+  내가 사용할 Spring 버젼 document를 참조해서 org.hibernate를 사용하는 버젼 확인..!
+
+- com.h2database
+
+javax.persistence:javax.persistence-api:2.2
+
+하이버네이트가 jpa인터페이스를 가지고 있는것
+
+JPA 설정 - persistence.xml
+
+main/resource/META-INF/persistence.xml
+
+hibernate.dialect
+데이터베이스 방언 : 표준 SQL문법을 따르지 않는 특정 SQL 언어의 문법
+JPA는 데이터베이스를 쓰다가 다른 데이터베이스로 바꾸는게 가능해야한다.
+
+javax- 로 시작하는건
+javax의 구현체로서 Hibernate, 등등 있는데 javax- 부분은 Hibernate 말고 다른 라이브러리로 바꿔도 안고쳐도 된다. Hibernate로 시작하는건 Hibernate에서만 사용 가능한 것
+
+EntityManagerFactory
+웹 서버가 올라오는 시점에 DB 당 하나만 생성이 됨
+WAS가 내려갈 때 닫아줘야 함.
+
+EntityManager
+요청이 올 때마다 썼다가 close()를 반복(쓰레드 간에 절대 공유 X !!)
+
+JPQL
+객체를 대상으로 하는 객체지향SQL
+(SQL은 데이터베이스 테이블을 대상으로 쿼리를 날림)
+강점은 SQL방언에 맞게 날려줌. SQL 추상화로 특정 데이터베이스 SQL에 의존X
+
+```
+EntityMagagerFactory emf = Persistence.createEntityManagerFactory(“hello”);
+
+EntityManager entityM anager = emf.createEntityManager();
+
+EntityTransaction tx = em.getTransaction();
+tx.begin();
+
+try {
+	/*
+
+	Member member = new Member();
+
+	member.setId(1L);
+	member.setName(“helloA”);
+	// JPA에서 모든 데이터 변경 작업은 TX내에서 이뤄져야 함.
+	em.persist(member);
+	*/
+
+	Member findMember= em.find(Member.class, 1L);
+	//System.out.println(“findMember.id” + findMember.getId());
+
+	//System.out.println(“findMember.name” + findMember.getName());
+
+	findMember.setName(“HelloJPA”);
+
+
+
+
+	tx.commit();
+
+} catch (Exception e) {
+	tx.rollback();
+} finally {
+	em.close();
+}
+
+emf.close();
+```
+
+```
+
+// JPQL 사용 예
+(SQL 방언에 맞춰서 각 DB에 맞게 반영해줌)
+List<Member> result = em.createQuery(“select m from Member as m”, Member.class).getResultList();
+
+for (Member member : reuslt) {
+	System.out.println(member.name = “ + member.getName());
+}
+```
+
+```
+package hellojpa;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+// @Table(name = “USER”)	// 실제 DB테이블 명이 다를 경우
+public class Member {
+
+    @Id // PK 임을 표기
+    private Long id;
+
+    //@Column(name = "username”)	// 실제 DB테이블 명이 다를 경우
+    private String name;
+
+    //Getter, Setter …
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+/*
+
+create table Member {
+	id bigint not null,
+	name varchar(255),
+	primary key (id)
+}
+*/
+```
+
+```
+hibernate.show_sql
+hibernate.format_sql
+hibernate.use_sql_comments
+<!— insert hellojpa.Member —>
+```
+
+### 영속성 컨텍트스트 1
+
+// 객체를 생성한 상태 -> 비영속 상태
+
+// 객체를 저장한 상태(영속)
