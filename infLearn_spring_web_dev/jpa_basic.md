@@ -211,3 +211,5 @@ hibernate.use_sql_comments
 - JPQL 쿼리 실행 - 플러시 자동호출
 
 JPQL 쿼리 실행 시 플러시가 자동으로 호출 됨.
+
+### 기본키 매핑
