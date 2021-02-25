@@ -236,10 +236,97 @@ from emp e, dept d
 where d.loc = UPPER('Dallas') and e.deptno = d.deptno;
 
 
+--41
+select e1.ename, e1.sal
+from emp e1, emp e2, dept d
+where d.deptno = e2.deptno and e2.ename = upper('king') and e2.empno =e1.mgr;
+
+--42
+select e.deptno, ename, job
+from emp e, dept d
+where e.deptno = d.deptno and d.dname=upper('sales');
+
+--43
+select e1.empno, e1.ename, e1.sal
+from emp e1
+where ( select avg(sal) aver from emp ) < e1.sal and e1.deptno in (
+                    select deptno
+                    from emp
+                    where regexp_like(ename, 'T', 'i'));
+
+--44
+select ename, deptno, sal
+from emp 
+where sal in (select sal from emp where comm is not null);
 
 
+SELECT ENAME, DEPTNO, SAL
+FROM EMP
+WHERE SAL IN(SELECT SAL
+FROM EMP
+WHERE COMM IS NOT NULL);
 
---
+--45
+select e1.ename, d1.dname, e1.sal
+from emp e1, dept d1
+where e1.job in (select job
+                        from emp e2, dept d
+                        where d.loc = upper('dallas') and e2.deptno = d.deptno) 
+         and d1.deptno = e1.deptno;
+
+--46
+select ename, hiredate, sal
+from emp
+where comm is not null and sal = (select sal from emp where ename=UPPER('Scott'));
+
+select e.ename, e.hiredate, e.sal
+from emp e, (
+                select sal
+                from emp
+                where ename = upper('scott')) t
+where e.sal = t.sal and e.comm is not null;
+
+--47
+select empno, ename, sal 
+from emp
+where sal > (select max(sal)
+    from emp
+    where job = UPPER('Clerk'))
+ORDER BY sal desc;
+
+--48
+select ename, sal, deptno
+from emp
+where job in 
+ (select job from emp where regexp_like(ename, 'A', 'i'));
+
+
+--49
+select e1.ename, d1.dname
+from emp e1 join ( 
+        select sal, NVL(comm, 0) comm
+        from emp e
+        inner join dept d on d.deptno = e.deptno and d.loc = UPPER('New York')) t on e1.sal = t.sal and NVL(e1.comm,0) = t.comm, dept d1
+where e1.deptno = d1.deptno;
+
+--50
+select e1.empno, e1.ename, e1.job, e1.sal, d.dname, NVL(CAST(e1.comm as CHAR), 'NoCommision') Comm
+from emp e1, emp e2, dept d
+where d.loc=upper('Dallas') and d.deptno =e2.deptno and e2.job = e1.job and e2.mgr = e1.mgr
+order by e1.sal desc;
+
+-- READ
+--SELECT * FROM emp
+
+-- CREATE
+--INSERT INTO emp (¼Ó¼º) VALUES (°ª)
+
+-- UPDATE
+--UPDATE emp SET job = 'PROGRAMMER' WHERE empno=1;
+
+-- DELETE
+--DELETE FROM emp WHERE empno = 1;
+
 -- ALTER
 -- CREATE
 -- DROP
